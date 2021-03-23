@@ -16,14 +16,17 @@ time.sleep(5)
 
 submit1 = browser.find_element_by_tag_name('button')
 submit1.click()
-time.sleep(10)
+time.sleep(5)
 
 password = browser.find_element_by_class_name('withIcon-1-1-73')
 password.send_keys('ooERpoOTr/34')
-time.sleep(5)
+time.sleep(2)
 
 submit2 = browser.find_element_by_tag_name('button')
 submit2.click()
+time.sleep(20)
+
+browser.get('https://e.mail.ru/compose/')
 time.sleep(20)
 
 browser.quit()
