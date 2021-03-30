@@ -1,20 +1,22 @@
 import time
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
-# print('Введите адрес получателя:')
-# mail = input()
+print('Введите адрес получателя:')
+mail = input()
 print('Введите сообщение:')
 text = input()
 
-option = webdriver.ChromeOptions()
-option.add_argument('headless')
+option = Options()
+option.headless = True
 
 browser = webdriver.Chrome(executable_path=r'C:\проги\питон\moduls\chromedriver.exe', options=option)
 browser.get('https://account.mail.ru/')
+print('Браузер успешно запустился.')
 time.sleep(5)
-print('Браузер успешно запустился. Начинается авторизация...')
+print('Начинается авторизация...')
 
-login = browser.find_element_by_class_name('input-1-1-72')
+login = browser.find_element_by_xpath('//input[@name="username"]')
 login.send_keys('yasha.b0lda@inbox.ru')
 time.sleep(2)
 
@@ -30,14 +32,14 @@ print('Авторизация завершена.')
 submit2 = browser.find_element_by_tag_name('button')
 submit2.click()
 print('Заходим в аккаунт...')
-time.sleep(20)
+time.sleep(17)
 
 browser.get('https://e.mail.ru/compose/')
 time.sleep(5)
 print('Отправляем письмо...')
 
 who = browser.find_element_by_xpath('//input[@style="width: 12px;"]')
-who.send_keys('qn0n1m0us@mail.ru')
+who.send_keys(mail)
 time.sleep(2)
 
 message = browser.find_element_by_xpath('//div[@aria-label="false"]/div[1]')
