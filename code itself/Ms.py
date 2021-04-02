@@ -1,19 +1,11 @@
 import time
+import sys
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 
-print('Введите адрес получателя:')
-mail = input()
-print('Введите сообщение:')
-text = input()
-
-option = Options()
-option.headless = True
-
-browser = webdriver.Chrome(executable_path=r'C:\проги\питон\moduls\chromedriver.exe', options=option)
+browser = webdriver.Edge(executable_path=r'C:\проги\питон\moduls\msedgedriver.exe')
 browser.get('https://account.mail.ru/')
 print('Браузер успешно запустился.')
-time.sleep(5)
+time.sleep(10)
 print('Начинается авторизация...')
 
 login = browser.find_element_by_xpath('//input[@name="username"]')
@@ -32,18 +24,18 @@ print('Авторизация завершена.')
 submit2 = browser.find_element_by_tag_name('button')
 submit2.click()
 print('Заходим в аккаунт...')
-time.sleep(17)
+time.sleep(20)
 
 browser.get('https://e.mail.ru/compose/')
 time.sleep(5)
 print('Отправляем письмо...')
 
 who = browser.find_element_by_xpath('//input[@style="width: 12px;"]')
-who.send_keys(mail)
+who.send_keys(sys.argv[1])
 time.sleep(2)
 
-message = browser.find_element_by_xpath('//div[@aria-label="false"]/div[1]')
-message.send_keys(text)
+message = browser.find_element_by_xpath('//div[@role="textbox"]/div[1]')
+message.send_keys(' '.join(sys.argv[2:]))
 time.sleep(2)
 
 sender = browser.find_element_by_xpath('//span[@title="Отправить"]')
