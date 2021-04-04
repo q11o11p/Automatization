@@ -8,9 +8,10 @@ options.headless = True
 
 browser = webdriver.Chrome(executable_path=r'C:\проги\питон\moduls\chromedriver.exe', chrome_options=options)
 browser.get('https://account.mail.ru/')
-print('Браузер успешно запустился.')
-time.sleep(35)
-print('Начинается авторизация...')
+for i in range(36, 0, -1):
+    print(f'\rБраузер запускается...{float(i)}', end='', flush=True)
+    time.sleep(1)
+print('\nБраузер успешно запустился. Начинается авторизация...')
 
 login = browser.find_element_by_xpath('//input[@name="username"]')
 login.send_keys('yasha.b0lda@inbox.ru')
@@ -27,24 +28,29 @@ print('Авторизация завершена.')
 
 submit2 = browser.find_element_by_tag_name('button')
 submit2.click()
-print('Заходим в аккаунт...')
-time.sleep(35)
+for i in range(36, 0, -1):
+    print(f'\rЗаходим в аккаунт...{float(i)}', end='', flush=True)
+    time.sleep(1)
 
 browser.get('https://e.mail.ru/compose/')
-time.sleep(15)
-print('Отправляем письмо...')
+for i in range(16, 0, -1):
+    print(f'\rЗагружаем форму для отправки письма...{float(i)}', end='', flush=True)
+    time.sleep(1)
+print('\nОтправляем письмо...')
 
 who = browser.find_element_by_xpath('//input[@style="width: 12px;"]')
 who.send_keys(sys.argv[1])
+print('Вводим имя...')
 time.sleep(5)
 
 message = browser.find_element_by_xpath('//div[@role="textbox"]/div[1]')
 message.send_keys(' '.join(sys.argv[2:]))
+print('И сообщение...')
 time.sleep(2)
 
 sender = browser.find_element_by_xpath('//span[@title="Отправить"]')
 sender.click()
-print('Письмо успешно отправлено!')
-time.sleep(6)
+print('Всё! Письмо успешно отправлено!')
+time.sleep(4)
 
 browser.quit()
